@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="su">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diajar Basa Sunda: Biantara, Paribasa, & Panumbu Catur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Sand -->
+    <!-- Application Structure Plan: The application is structured as a single-page application (SPA) with a top-level tabbed navigation for the three main topics: Biantara, Paribasa, and Panumbu Catur. This structure was chosen over a linear document format to allow for non-sequential, user-driven exploration. It empowers users to jump directly to the topic of interest. Within each tab, content is organized into logical, interactive modules (e.g., interactive diagrams, searchable card galleries, step-by-step guides) to break down complex information into digestible chunks, promoting engagement and better retention. The user flow is designed to be intuitive: select a topic, then interact with its specific components to learn. This architecture makes the learning process more dynamic and less overwhelming than reading a long text. -->
+    <!-- Visualization & Content Choices: 
+        1. Biantara Structure: Report info (Bubuka, Eusi, Panutup) -> Goal (Organize/Inform) -> Viz/Method (Interactive HTML/CSS diagram) -> Interaction (Click on a section to reveal its detailed components) -> Justification (More engaging and visually intuitive than a static list) -> Library/Method (HTML, Tailwind CSS, Vanilla JS).
+        2. Biantara Methods: Report info (Impromptu, Memoriter, etc.) -> Goal (Compare) -> Viz/Method (Side-by-side card layout) -> Interaction (Click a method to highlight and view its pros and cons) -> Justification (Facilitates direct comparison and quick understanding of differences) -> Library/Method (HTML, Tailwind CSS, Vanilla JS).
+        3. Paribasa List: Report info (Table of proverbs) -> Goal (Organize/Inform) -> Viz/Method (Searchable, interactive card gallery) -> Interaction (Search input filters cards in real-time; clicking a card flips/reveals its meaning) -> Justification (Transforms a static table into an engaging, explorable tool. Search adds high utility) -> Library/Method (HTML, Tailwind CSS, Vanilla JS).
+        4. Panumbu Catur Duties: Report info (Tasks before, during, after) -> Goal (Change/Process) -> Viz/Method (Interactive step-by-step timeline/guide) -> Interaction (Clicking on each stage reveals the specific tasks for that stage) -> Justification (Presents a process in a clear, sequential, and interactive manner, which is better for procedural knowledge) -> Library/Method (HTML, Tailwind CSS, Vanilla JS).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            border-bottom-color: #A58D76;
+            color: #A58D76;
+            font-weight: 700;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .paribasa-card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .paribasa-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .paribasa-card .front, .paribasa-card .back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        .paribasa-card .back {
+            transform: rotateY(180deg);
+        }
+        .interactive-box {
+            transition: all 0.3s ease-in-out;
+        }
+        .interactive-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF8] text-[#3D352F]">
+
+    <div class="container mx-auto px-4 py-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-[#6D5A4B]">Éksplorasi Basa Sunda</h1>
+            <p class="text-lg text-[#A58D76] mt-2">Pituduh Interaktif pikeun Biantara, Paribasa, & Panumbu Catur</p>
+        </header>
+
+        <nav class="mb-8 border-b border-[#EAE0D5]">
+            <ul class="flex justify-center -mb-px">
+                <li><button class="tab-btn active inline-block p-4 border-b-2 border-transparent rounded-t-lg" data-tab="biantara">🎙️ Biantara</button></li>
+                <li><button class="tab-btn inline-block p-4 border-b-2 border-transparent rounded-t-lg" data-tab="paribasa">📖 Paribasa</button></li>
+                <li><button class="tab-btn inline-block p-4 border-b-2 border-transparent rounded-t-lg" data-tab="panumbu-catur">🎤 Panumbu Catur</button></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- Biantara Section -->
+            <section id="biantara" class="content-section active">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-[#EAE0D5]">
+                    <h2 class="text-3xl font-bold text-[#6D5A4B] mb-2">Biantara (Pidato Basa Sunda)</h2>
+                    <p class="mb-6 text-[#5e5046]">Biantara nyaéta seni nyarita di hareupeun balaréa pikeun nepikeun hiji maksud atawa informasi. Ieu sanés ngan saukur ngomong, tapi ngabutuhkeun struktur, basa, jeung wirahma anu merenah sangkan pesen tiasa katampi kalayan hadé. Jelajah unsur-unsur penting biantara di handap ieu.</p>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#A58D76] mb-4 text-center">Struktur Biantara</h3>
+                            <p class="text-center mb-6 text-[#5e5046]">Biantara anu hadé ngabogaan struktur anu jelas. Klik unggal bagian di handap pikeun ningali detil eusina.</p>
+                            <div class="flex flex-col md:flex-row justify-center items-center gap-2 text-center">
+                                <div class="structure-part interactive-box p-4 bg-[#F8F3ED] rounded-lg w-full md:w-1/3 cursor-pointer" data-detail="detail-bubuka">
+                                    <h4 class="font-bold text-lg">1. Bubuka</h4>
+                                    <p class="text-sm text-[#8a7a6c]">Muka paguneman</p>
+                                </div>
+                                <div class="text-[#A58D76] text-2xl font-mono hidden md:block">&rarr;</div>
+                                <div class="structure-part interactive-box p-4 bg-[#F8F3ED] rounded-lg w-full md:w-1/3 cursor-pointer" data-detail="detail-eusi">
+                                    <h4 class="font-bold text-lg">2. Eusi</h4>
+                                    <p class="text-sm text-[#8a7a6c]">Inti pedaran</p>
+                                </div>
+                                <div class="text-[#A58D76] text-2xl font-mono hidden md:block">&rarr;</div>
+                                <div class="structure-part interactive-box p-4 bg-[#F8F3ED] rounded-lg w-full md:w-1/3 cursor-pointer" data-detail="detail-panutup">
+                                    <h4 class="font-bold text-lg">3. Panutup</h4>
+                                    <p class="text-sm text-[#8a7a6c]">Mungkas paguneman</p>
+                                </div>
+                            </div>
+                            <div id="structure-detail-container" class="mt-6 p-6 bg-[#FDFBF8] rounded-lg border border-[#EAE0D5] min-h-[100px]">
+                                <p class="text-center text-[#8a7a6c]">Pilih salah sahiji bagian struktur pikeun ningali eusina di dieu.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#A58D76] mb-4 text-center">Métode Nepikeun Biantara</h3>
+                             <p class="text-center mb-6 text-[#5e5046]">Aya opat métode utama dina nepikeun biantara. Masing-masing boga kaunggulan jeung kahéngkéranana.</p>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <!-- Impromptu -->
+                                <div class="interactive-box p-4 bg-[#F8F3ED] rounded-lg border border-[#EAE0D5]">
+                                    <h4 class="text-xl font-bold text-center text-[#6D5A4B] mb-2">Impromtu (Dadakan)</h4>
+                                    <p class="text-sm mb-3">Biantara tanpa persiapan nanaon, langsung di tempat.</p>
+                                    <p class="font-semibold text-green-700">Kaunggulan:</p>
+                                    <ul class="list-disc list-inside text-sm text-green-600 mb-2"><li>Langkung spontan</li><li>Suasana leuwih hirup</li></ul>
+                                    <p class="font-semibold text-red-700">Kahéngkéran:</p>
+                                    <ul class="list-disc list-inside text-sm text-red-600"><li>Bisa jadi teu ngaruntuy</li><li>Gampang gugup</li></ul>
+                                </div>
+                                <!-- Memoriter -->
+                                <div class="interactive-box p-4 bg-[#F8F3ED] rounded-lg border border-[#EAE0D5]">
+                                    <h4 class="text-xl font-bold text-center text-[#6D5A4B] mb-2">Ngapalkeun</h4>
+                                    <p class="text-sm mb-3">Nyiapkeun naskah lengkep, teras diapalkeun kecap demi kecap.</p>
+                                    <p class="font-semibold text-green-700">Kaunggulan:</p>
+                                    <ul class="list-disc list-inside text-sm text-green-600 mb-2"><li>Basa leuwih tartib</li><li>Lancar upami apal pisan</li></ul>
+                                    <p class="font-semibold text-red-700">Kahéngkéran:</p>
+                                    <ul class="list-disc list-inside text-sm text-red-600"><li>Karasa kaku/monoton</li><li>Kurang interaksi</li></ul>
+                                </div>
+                                <!-- Naskah -->
+                                <div class="interactive-box p-4 bg-[#F8F3ED] rounded-lg border border-[#EAE0D5]">
+                                    <h4 class="text-xl font-bold text-center text-[#6D5A4B] mb-2">Naskah</h4>
+                                    <p class="text-sm mb-3">Maca naskah anu tos disiapkeun. Biasa dianggo dina acara resmi.</p>
+                                    <p class="font-semibold text-green-700">Kaunggulan:</p>
+                                    <ul class="list-disc list-inside text-sm text-green-600 mb-2"><li>Kecap-kecapna pasti</li><li>Ngahindar tina kasalahan</li></ul>
+                                    <p class="font-semibold text-red-700">Kahéngkéran:</p>
+                                    <ul class="list-disc list-inside text-sm text-red-600"><li>Teu aya kontak panon</li><li>Teu tiasa adaptasi</li></ul>
+                                </div>
+                                <!-- Ekstemporan -->
+                                <div class="interactive-box p-4 bg-[#F8F3ED] rounded-lg border border-[#EAE0D5]">
+                                    <h4 class="text-xl font-bold text-center text-[#6D5A4B] mb-2">Ékstémporan</h4>
+                                    <p class="text-sm mb-3">Nyiapkeun catetan gurat badagna (outline) wungkul.</p>
+                                     <p class="font-semibold text-green-700">Kaunggulan:</p>
+                                    <ul class="list-disc list-inside text-sm text-green-600 mb-2"><li>Langkung fleksibel</li><li>Interaksi saé</li></ul>
+                                    <p class="font-semibold text-red-700">Kahéngkéran:</p>
+                                    <ul class="list-disc list-inside text-sm text-red-600"><li>Butuh latihan loba</li><li>Bisa aya nu kaliwat</li></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Paribasa Section -->
+            <section id="paribasa" class="content-section">
+                 <div class="bg-white p-6 rounded-xl shadow-sm border border-[#EAE0D5]">
+                    <h2 class="text-3xl font-bold text-[#6D5A4B] mb-2">Paribasa Sunda</h2>
+                    <p class="mb-6 text-[#5e5046]">Paribasa nyaéta ungkara anu geus matok sarta ngandung harti injeuman, eusina piwuruk atawa palasipah hirup ti karuhun. Hayu urang diajar sababaraha paribasa populér ngaliwatan galeri interaktif di handap ieu. Tulis kecap dina kotak teang pikeun nyaring paribasa, teras klik kartuna pikeun ningali hartina.</p>
+                    
+                    <div class="mb-6">
+                        <input type="text" id="paribasa-search" placeholder="Téang paribasa..." class="w-full p-3 rounded-lg border border-[#EAE0D5] bg-[#FDFBF8] focus:ring-2 focus:ring-[#A58D76] focus:outline-none">
+                    </div>
+
+                    <div id="paribasa-gallery" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Panumbu Catur Section -->
+            <section id="panumbu-catur" class="content-section">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-[#EAE0D5]">
+                    <h2 class="text-3xl font-bold text-[#6D5A4B] mb-2">Panumbu Catur (Moderator)</h2>
+                    <p class="mb-6 text-[#5e5046]">Panumbu catur atanapi moderator nyaéta jalma anu pancénna mingpin, ngatur, sareng ngokolakeun jalanna hiji sawala (diskusi). Peranna penting pisan sangkan diskusi lumangsung tartib, adil, tur ngahontal tujuan. Ieu di handap pituduh praktis pikeun jadi panumbu catur anu hadé.</p>
+
+                     <div class="flex flex-col md:flex-row gap-8">
+                        <div class="w-full md:w-1/3">
+                            <h3 class="text-2xl font-semibold text-[#A58D76] mb-4">Pancén Panumbu Catur</h3>
+                            <ul class="space-y-2">
+                                <li><button class="duty-btn w-full text-left p-3 rounded-lg bg-[#F8F3ED] hover:bg-[#EAE0D5] transition" data-duty="saacan">1. Saméméh Sawala (Persiapan)</button></li>
+                                <li><button class="duty-btn w-full text-left p-3 rounded-lg bg-[#F8F3ED] hover:bg-[#EAE0D5] transition" data-duty="salila">2. Nalika Sawala Lumangsung</button></li>
+                                <li><button class="duty-btn w-full text-left p-3 rounded-lg bg-[#F8F3ED] hover:bg-[#EAE0D5] transition" data-duty="sabada">3. Sanggeus Sawala Réngsé</button></li>
+                            </ul>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                             <div id="duty-detail-container" class="p-6 bg-[#FDFBF8] rounded-lg border border-[#EAE0D5] min-h-[300px]">
+                                 <p class="text-center text-[#8a7a6c]">Pilih salah sahiji pancén pikeun ningali detil lengkah-léngkahna di dieu.</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 text-[#A58D76]">
+            <p>Aplikasi Diajar Basa Sunda Interaktif &copy; 2025</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const tabs = document.querySelectorAll('.tab-btn');
+            const sections = document.querySelectorAll('.content-section');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    sections.forEach(section => {
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        } else {
+                            section.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // Biantara Structure Logic
+            const structureParts = document.querySelectorAll('.structure-part');
+            const detailContainer = document.getElementById('structure-detail-container');
+            const structureDetails = {
+                'detail-bubuka': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Eusi Bagian Bubuka</h4>
+                    <ul class="list-disc list-inside space-y-2 text-[#5e5046]">
+                        <li><b>Salam Bubuka:</b> Ngucapkeun salam (misalna Assalamualaikum, Sampurasun).</li>
+                        <li><b>Mukadimah:</b> Pangwilujeng jeung basa-basi pikeun muka biantara.</li>
+                        <li><b>Puji & Syukur:</b> Ngedalkeun rasa sukur ka Gusti Nu Maha Suci.</li>
+                        <li><b>Solawat & Salam:</b> Ka Kangjeng Nabi Muhammad SAW.</li>
+                        <li><b>Panghormatan:</b> Nyebutan tamu penting anu hadir.</li>
+                        <li><b>Hatur Nuhun:</b> Ka panata acara jeung nu hadir.</li>
+                    </ul>
+                `,
+                'detail-eusi': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Eusi Bagian Eusi</h4>
+                    <p class="mb-3 text-[#5e5046]">Ieu mangrupa inti tina biantara, tempat medar jejer anu rék ditepikeun. Eusina kudu:</p>
+                    <ul class="list-disc list-inside space-y-2 text-[#5e5046]">
+                        <li><b>Jelas jeung Ngaruntuy:</b> Poko-poko pikiran ditepikeun kalawan sistematis.</li>
+                        <li><b>Luyu jeung Tujuan:</b> Nepikeun informasi, ngajak (persuasif), atawa ngahibur.</li>
+                        <li><b>Munel:</b> Ngandung informasi anu aya mangpaatna pikeun nu ngaregepkeun.</li>
+                        <li><b>Conto:</b> Dina biantara miéling kamerdékaan, eusina bisa ngeunaan jasa pahlawan, jeung ajakan ngeusian kamerdékaan.</li>
+                    </ul>
+                `,
+                'detail-panutup': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Eusi Bagian Panutup</h4>
+                    <ul class="list-disc list-inside space-y-2 text-[#5e5046]">
+                        <li><b>Kacindekan:</b> Ngaringkes poko-poko penting tina eusi biantara.</li>
+                        <li><b>Sanduk-sanduk:</b> Ménta dihampura bisi aya cariosan anu kirang merenah.</li>
+                        <li><b>Doa:</b> Nepikeun harepan atawa doa pikeun kahadéan.</li>
+                        <li><b>Salam Panutup:</b> Ngucapkeun salam pikeun mungkas biantara.</li>
+                    </ul>
+                `
+            };
+
+            structureParts.forEach(part => {
+                part.addEventListener('click', () => {
+                    const detailKey = part.getAttribute('data-detail');
+                    detailContainer.innerHTML = structureDetails[detailKey];
+                });
+            });
+            
+            // Paribasa Logic
+            const paribasaData = [
+                { paribasa: 'Cikaracak ninggang batu laun-laun jadi legok.', harti: 'Pagawéan hésé anu dilakukeun kalawan sabar jeung tekun, lila-lila bakal mawa hasil.' },
+                { paribasa: 'Adat kakurung ku iga.', harti: 'Sipat atawa kalakuan goréng anu hésé pisan dirobahna.' },
+                { paribasa: 'Mihapé hayam ka heulang.', harti: 'Nitipkeun barang ka jalma anu teu bisa dipercaya atawa picilakaeun.' },
+                { paribasa: 'Kudu hadé gogog hadé tagog.', harti: 'Kudu hadé basa jeung hadé tingkah laku.' },
+                { paribasa: 'Lamun keyeng tangtu pareng.', harti: 'Lamun getol jeung soson-soson, pasti bakal kahontal cita-cita.' },
+                { paribasa: 'Ulah pupulur méméh mantun.', harti: 'Ulah ménta buruhan saméméh pagawéan réngsé.' },
+                { paribasa: 'Sacangreud pageuh sagolek pangkek.', harti: 'Kudu pengkuh kana jangji, kuat pamadegan, teu gampang robah.' },
+                { paribasa: 'Nyaur kudu diukur nyabda kudu di unggang.', harti: 'Lamun nyarita kudu dipikirkeun heula, ulah asal ceplak.' },
+                { paribasa: 'Mun teu ngakal moal ngakeul.', harti: 'Lamun teu daék usaha atawa digawé, moal bisa nyumponan kabutuh hirup.' },
+                { paribasa: 'Suku dijieun hulu, hulu dijieun suku.', harti: 'Digawé kalintang ripuhna, teu inget ka waktu jeung kacapé.' },
+                { paribasa: 'Pipilih nyiar nu leuwih, kocéplak meunang nu pécak.', harti: 'Loba teuing milih, antukna meunang nu leuwih goréng.' },
+                { paribasa: 'Kudu bisa kabulu kabalé.', harti: 'Kudu bisa campur gaul jeung sagala lapisan masarakat.' },
+                { paribasa: 'Tiis ceuli herang mata.', harti: 'Kahirupan anu tengtrem, ayem, jauh tina masalah.' },
+                 { paribasa: 'Abong biwir teu diwengku.', harti: 'Jalma anu ngomongna teu bisa dikontrol, asal ceplak.' },
+                 { paribasa: 'Ulah meungpeun carang ku ayakan.', harti: 'Ulah pura-pura teu nyaho bari ngantepkeun batur ngalakukeun kasalahan.' },
+            ];
+
+            const gallery = document.getElementById('paribasa-gallery');
+            const searchInput = document.getElementById('paribasa-search');
+
+            function renderParibasa(filter = '') {
+                gallery.innerHTML = '';
+                const filteredData = paribasaData.filter(p => p.paribasa.toLowerCase().includes(filter.toLowerCase()));
+                
+                if(filteredData.length === 0){
+                    gallery.innerHTML = `<p class="text-center text-[#8a7a6c] col-span-full">Paribasa anu ditéang teu kapendak.</p>`;
+                    return;
+                }
+
+                filteredData.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'paribasa-card h-48';
+                    card.innerHTML = `
+                        <div class="front absolute w-full h-full p-6 bg-[#F8F3ED] rounded-xl flex flex-col justify-center items-center text-center shadow-md border border-[#EAE0D5]">
+                            <p class="font-semibold text-lg text-[#6D5A4B]">${item.paribasa}</p>
+                            <span class="text-xs text-[#A58D76] mt-4">Klik pikeun ningali harti</span>
+                        </div>
+                        <div class="back absolute w-full h-full p-6 bg-[#A58D76] text-white rounded-xl flex flex-col justify-center items-center text-center shadow-md">
+                            <p class="font-normal">${item.harti}</p>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('is-flipped');
+                    });
+                    gallery.appendChild(card);
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                renderParibasa(e.target.value);
+            });
+
+            renderParibasa();
+
+            // Panumbu Catur Logic
+            const dutyBtns = document.querySelectorAll('.duty-btn');
+            const dutyDetailContainer = document.getElementById('duty-detail-container');
+            const dutyDetails = {
+                'saacan': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Pancén Saméméh Sawala</h4>
+                    <p class="mb-4 text-[#5e5046]">Persiapan anu hadé mangrupa konci kasuksésan. Hal-hal anu kudu disiapkeun:</p>
+                    <ul class="list-decimal list-inside space-y-2 text-[#5e5046]">
+                        <li>Ngawasa jejer/topik anu bakal disawalakeun.</li>
+                        <li>Mikanyaho kasang tukang pamilon jeung pangjejer.</li>
+                        <li>Nyiapkeun catetan gurat badag ngeunaan alur sawala.</li>
+                        <li>Nyiapkeun alat panuduh waktu (timer).</li>
+                        <li>Datang leuwih ti heula pikeun mariksa persiapan ahir.</li>
+                    </ul>
+                `,
+                'salila': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Pancén Nalika Sawala Lumangsung</h4>
+                    <p class="mb-4 text-[#5e5046]">Pancén utama nyaéta ngatur patalimarga omongan sangkan tartib:</p>
+                    <ul class="list-decimal list-inside space-y-2 text-[#5e5046]">
+                        <li>Muka sawala, ngawanohkeun pangjejer, jeung nepikeun aturan.</li>
+                        <li>Méré kasempetan ka pangjejer pikeun medar materi.</li>
+                        <li>Ngatur sési tanya jawab kalawan adil.</li>
+                        <li>Mastikeun patarosan jeung waleran teu méngpar tina jejer.</li>
+                        <li>Nengahan lamun aya padungdengan (adu argumén).</li>
+                        <li>Ngatur waktu sangkan teu ngaliwatan wates anu ditangtukeun.</li>
+                        <li>Kudu nétral, teu mihak ka salasahiji pihak.</li>
+                    </ul>
+                `,
+                'sabada': `
+                    <h4 class="font-bold text-lg text-[#6D5A4B] mb-3">Pancén Sanggeus Sawala Réngsé</h4>
+                    <p class="mb-4 text-[#5e5046]">Sanajan sawala geus réngsé, pancén panumbu catur can tamat:</p>
+                    <ul class="list-decimal list-inside space-y-2 text-[#5e5046]">
+                        <li>Nyieun kacindekan (ringkesan) tina hasil sawala.</li>
+                        <li>Ngahaturkeun nuhun ka pangjejer jeung sakabéh pamilon.</li>
+                        <li>Ménta dihampura bisi aya kalepatan salila mingpin acara.</li>
+                        <li>Nutup acara sawala ku salam panutup.</li>
+                        <li>Nyanggakeun deui acara ka panata acara (MC).</li>
+                    </ul>
+                `
+            };
+
+            dutyBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const dutyKey = btn.getAttribute('data-duty');
+                    dutyDetailContainer.innerHTML = dutyDetails[dutyKey];
+                    dutyBtns.forEach(b => b.classList.remove('bg-[#EAE0D5]'));
+                    btn.classList.add('bg-[#EAE0D5]');
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
